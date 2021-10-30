@@ -74,11 +74,16 @@
                <label class="luxbar-hamburger luxbar-hamburger-doublespin"
                id="luxbar-hamburger" for="luxbar-checkbox"> <span></span> </label>
            </li>
-           <li class="luxbar-item"><a href="home.html">Home</a></li>
+           <li class="luxbar-item"><a href="/">Home</a></li>
            <li class="luxbar-item"><a href="form">Reserve</a></li>
            
-           <li class="luxbar-item"><a href="register/signup">SignUp</a></li>
-           <li class="luxbar-item"><a href="register/login">Login</a></li>
+           {% if user.is_authenticated %}
+               
+                <li class="luxbar-item"><a href="register/logout">Log out</a></li>
+                {% else %}
+                <li class="luxbar-item"><a href="register/signup">SignUp</a></li>
+                <li class="luxbar-item"><a href="register/login">Login</a></li>
+                {% endif %}
           
        </ul>
    </div>
