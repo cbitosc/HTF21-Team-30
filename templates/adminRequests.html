@@ -33,15 +33,20 @@
                     <label class="luxbar-hamburger luxbar-hamburger-doublespin"
                     id="luxbar-hamburger" for="luxbar-checkbox"> <span></span> </label>
                 </li>
-                <li class="luxbar-item"><a href=" ">Home</a></li>
+                <li class="luxbar-item"><a href="/">Home</a></li>
 
                 {% if request.user.email == "student" %}
                 <li class="luxbar-item"><a href="form">Reserve</a></li>
                 {% elif request.user.email == "admin" %}
-                <li class="luxbar-item"><a href="#">Requests</a></li>
+                <li class="luxbar-item"><a href="">Requests</a></li>
                 {% endif %}     
+                {% if user.is_authenticated %}
+               
+                <li class="luxbar-item"><a href="register/logout">Log out</a></li>
+                {% else %}
                 <li class="luxbar-item"><a href="register/signup">SignUp</a></li>
                 <li class="luxbar-item"><a href="register/login">Login</a></li>
+                {% endif %}  
                
             </ul>
         </div>
@@ -58,9 +63,8 @@
         Time : {{value.times}}<br>
       
         <form action="{% url 'accept' value=value.phno  %}" method="post">
-            {% csrf_token %} 
-          
-            <button onClick="func1()" type="submit" name='phno' class="viewButton" id="accept">Accept it</button>
+            {% csrf_token %}           
+            <button type="submit" name='phno' class="viewButton" id="accept">Accept it</button>
         </form>
         
         <form action="{% url 'reject' value=value.phno  %}" method="post">
@@ -73,11 +77,5 @@
      </div>
      <br>
      {% endfor %}
-     <script type="javascript">
-         function func1()
-         {
-            document.getElementById('accept').innerHTML = "Accepted!";
-         }
-     </script>
-
+    
 </body>
